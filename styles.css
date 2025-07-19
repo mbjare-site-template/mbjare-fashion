@@ -1,0 +1,51 @@
+/* Advanced styles for professional UI/UX */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+.product-card img {
+    transition: transform 0.5s ease;
+}
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.cart-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1.5rem 0;
+    transition: background-color 0.3s ease;
+}
+.cart-item:hover {
+    background-color: #f9fafb;
+}
+
+nav a {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+nav a:hover {
+    transform: scale(1.1);
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1445205170230-053b83016050');
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+#search-bar {
+    transition: all 0.3s ease;
+}
+#search-bar:focus {
+    width: 250px;
+}
