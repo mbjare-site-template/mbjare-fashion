@@ -3,85 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trendy Threads - Premium Clothing Store</title>
+    <title>Mbjare Fashion - Premium Clothing Store</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-50 font-poppins">
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+        <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <nav class="bg-white shadow-lg sticky top-0 z-40">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-gray-800">Mbjare Fashion</a>
-            <div class="flex items-center space-x-6">
-                <a href="#home" class="text-gray-600 hover:text-blue-600 transition">Home</a>
-                <a href="#shop" class="text-gray-600 hover:text-blue-600 transition">Shop</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition">About</a>
-                <a href="#cart" class="text-gray-600 hover:text-blue-600 transition">Cart (<span id="cart-count">0</span>)</a>
-                <div class="relative">
-                    <input type="text" id="search-bar" placeholder="Search products..." class="pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <a href="#" class="text-2xl md:text-3xl font-bold text-gray-800">Mbjare Fashion</a>
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="search-bar" placeholder="Search products..." class="pl-10 pr-4 py-2 border rounded-lg w-48 focus:outline-none focus:ring-2 focus:ring-blue-600" aria-label="Search products">
                     <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                 </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition font-medium" aria-label="Home">Home</a>
+                    <a href="#shop" class="text-gray-600 hover:text-blue-600 transition font-medium" aria-label="Shop">Shop</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition font-medium" aria-label="About">About</a>
+                    <a href="#cart" class="text-gray-600 hover:text-blue-600 transition font-medium" aria-label="Cart">Cart (<span id="cart-count">0</span>)</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600" aria-label="Toggle menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="flex flex-col items-center py-4">
+                <input type="text" id="mobile-search-bar" placeholder="Search products..." class="pl-10 pr-4 py-2 border rounded-lg w-3/4 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600" aria-label="Search products">
+                <a href="#home" class="text-gray-600 hover:text-blue-600 py-2 font-medium" aria-label="Home">Home</a>
+                <a href="#shop" class="text-gray-600 hover:text-blue-600 py-2 font-medium" aria-label="Shop">Shop</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 py-2 font-medium" aria-label="About">About</a>
+                <a href="#cart" class="text-gray-600 hover:text-blue-600 py-2 font-medium" aria-label="Cart">Cart (<span id="cart-count-mobile">0</span>)</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="bg-cover bg-center h-screen relative" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050')">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Floating Cart Button -->
+    <button id="cart-btn" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition z-30 md:hidden" aria-label="Open cart">
+        <i class="fas fa-shopping-cart text-xl"></i>
+    </button>
+
+    <!-- Hero Carousel with Parallax -->
+    <section id="home" class="relative h-screen parallax">
+        <div id="carousel" class="carousel w-full h-full">
+            <div class="carousel-item active" style="background-image: url('https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/2291367/pexels-photo-2291367.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/1927595/pexels-photo-1927595.jpeg')"></div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div class="container mx-auto h-full flex items-center justify-center text-center text-white relative z-10">
             <div class="animate-fade-in">
-                <h1 class="text-6xl font-extrabold mb-4">Elevate Your Wardrobe</h1>
-                <p class="text-2xl mb-6">Discover premium fashion with unbeatable style and quality</p>
-                <a href="#shop" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300">Shop Now</a>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Elevate Your Style</h1>
+                <p class="text-lg md:text-2xl mb-6">Discover Premium Fashion with Mbjare</p>
+                <a href="#shop" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300 font-medium">Shop Now</a>
             </div>
         </div>
     </section>
 
     <!-- Promotional Banner -->
-    <section class="bg-blue-600 text-white py-4">
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-lg font-semibold">Limited Offer: Get 20% OFF on your first purchase! Use code <span class="font-bold">TRENDY20</span></p>
+            <p class="text-lg font-semibold animate-pulse">Limited Offer: 20% OFF First Purchase! Use Code <span class="font-bold">TRENDY20</span></p>
         </div>
     </section>
 
     <!-- Featured Products -->
-    <section id="featured" class="py-16 bg-white">
+    <section id="featured" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-8">Featured Collections</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 animate-slide-up">Featured Collections</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gray-100 rounded-lg p-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="Men's Collection" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg" alt="Men's Collection" class="w-full h-48 object-cover rounded-lg mb-4 lazy" loading="lazy">
                     <h3 class="text-xl font-semibold">Men's Collection</h3>
-                    <p class="text-gray-600">Explore stylish and modern apparel for men</p>
+                    <p class="text-gray-600 text-sm">Modern and stylish apparel for men</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1585487000160-6b3b8d22b9ef" alt="Women's Collection" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg" alt="Women's Collection" class="w-full h-48 object-cover rounded-lg mb-4 lazy" loading="lazy">
                     <h3 class="text-xl font-semibold">Women's Collection</h3>
-                    <p class="text-gray-600">Elegant and trendy outfits for every occasion</p>
+                    <p class="text-gray-600 text-sm">Elegant outfits for every occasion</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Footwear" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg" alt="Footwear" class="w-full h-48 object-cover rounded-lg mb-4 lazy" loading="lazy">
                     <h3 class="text-xl font-semibold">Footwear</h3>
-                    <p class="text-gray-600">Step up your style with our premium shoes</p>
+                    <p class="text-gray-600 text-sm">Premium shoes for style and comfort</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3" alt="Accessories" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg" alt="Accessories" class="w-full h-48 object-cover rounded-lg mb-4 lazy" loading="lazy">
                     <h3 class="text-xl font-semibold">Accessories</h3>
-                    <p class="text-gray-600">Complete your look with our chic accessories</p>
+                    <p class="text-gray-600 text-sm">Chic add-ons to complete your look</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Shop Section -->
-    <section id="shop" class="py-16">
+    <section id="shop" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-8">Shop Our Collection</h2>
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <label for="category-filter" class="text-gray-600 mr-2">Filter by:</label>
-                    <select id="category-filter" class="border rounded-lg p-2">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 animate-slide-up">Shop Our Collection</h2>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
+                <div class="flex items-center w-full md:w-auto">
+                    <label for="category-filter" class="text-gray-600 mr-2 hidden md:block">Filter by:</label>
+                    <select id="category-filter" class="p-3 border rounded-lg w-full md:w-auto focus:outline-none focus:ring-2 focus:ring-blue-600" aria-label="Filter by category">
                         <option value="all">All</option>
                         <option value="men">Men</option>
                         <option value="women">Women</option>
@@ -89,40 +118,40 @@
                         <option value="accessories">Accessories</option>
                     </select>
                 </div>
-                <div>
-                    <label for="sort-filter" class="text-gray-600 mr-2">Sort by:</label>
-                    <select id="sort-filter" class="border rounded-lg p-2">
+                <div class="flex items-center w-full md:w-auto">
+                    <label for="sort-filter" class="text-gray-600 mr-2 hidden md:block">Sort by:</label>
+                    <select id="sort-filter" class="p-3 border rounded-lg w-full md:w-auto focus:outline-none focus:ring-2 focus:ring-blue-600" aria-label="Sort by">
                         <option value="default">Default</option>
                         <option value="price-low">Price: Low to High</option>
                         <option value="price-high">Price: High to Low</option>
                     </select>
                 </div>
             </div>
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="bg-gray-100 py-16">
+    <section id="testimonials" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-8">What Our Customers Say</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 animate-slide-up">What Our Customers Say</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-gray-600 italic">"Amazing quality and super fast delivery! My new favorite store."</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-600 italic text-sm">"Amazing quality and super fast delivery! My new favorite store."</p>
                     <p class="mt-4 font-semibold">Sarah K.</p>
                     <div class="flex text-yellow-400 mt-2">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-gray-600 italic">"The clothes are stylish and fit perfectly. Highly recommend!"</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-600 italic text-sm">"The clothes are stylish and fit perfectly. Highly recommend!"</p>
                     <p class="mt-4 font-semibold">James L.</p>
                     <div class="flex text-yellow-400 mt-2">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <p class="text-gray-600 italic">"Great customer service and a fantastic selection of products."</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-600 italic text-sm">"Great customer service and a fantastic selection of products."</p>
                     <p class="mt-4 font-semibold">Emily R.</p>
                     <div class="flex text-yellow-400 mt-2">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -132,57 +161,60 @@
         </div>
     </section>
 
-    <!-- Newsletter Signup -->
-    <section class="bg-blue-600 text-white py-16">
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Join Our Newsletter</h2>
-            <p class="text-lg mb-6">Stay updated with the latest trends and exclusive offers!</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 animate-slide-up">Join Our Fashion Community</h2>
+            <p class="text-lg mb-6 max-w-2xl mx-auto">Stay updated with the latest trends and exclusive offers!</p>
             <div class="max-w-md mx-auto flex">
-                <input type="email" id="newsletter-email" placeholder="Enter your email" class="flex-grow p-3 rounded-l-full focus:outline-none">
-                <button id="newsletter-btn" class="bg-gray-800 text-white px-6 py-3 rounded-r-full hover:bg-gray-900">Subscribe</button>
+                <input type="email" id="newsletter-email" placeholder="Enter your email" class="flex-grow p-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-300" aria-label="Newsletter Email">
+                <button id="newsletter-btn" class="bg-gray-900 text-white px-6 py-3 rounded-r-lg hover:bg-gray-800 transition" aria-label="Subscribe to newsletter">Subscribe</button>
             </div>
         </div>
     </section>
 
-    <!-- Cart Section -->
-    <section id="cart" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-8">Your Cart</h2>
-            <div id="cart-items" class="space-y-4"></div>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Cart</h2>
+            <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto"></div>
             <div class="text-right mt-6">
                 <p class="text-xl font-semibold">Total: $<span id="cart-total">0.00</span></p>
-                <button id="checkout-btn" class="bg-blue-600 text-white px-6 py-3 rounded-full mt-4 hover:bg-blue-700">Proceed to Checkout</button>
+                <div class="flex justify-end space-x-4 mt-4">
+                    <button id="cart-close" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition" aria-label="Close cart">Close</button>
+                    <button id="checkout-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" aria-label="Proceed to checkout">Checkout</button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
                 <h3 class="text-xl font-bold mb-4">Mbjare Fashion</h3>
-                <p class="text-gray-400">Your destination for premium fashion and style.</p>
+                <p class="text-gray-400 text-sm">Your destination for premium fashion and style.</p>
             </div>
             <div>
                 <h3 class="text-xl font-bold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="#shop" class="text-gray-400 hover:text-white">Shop</a></li>
-                    <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
-                    <li><a href="#cart" class="text-gray-400 hover:text-white">Cart</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    <li><a href="#shop" class="text-gray-400 hover:text-blue-400 transition">Shop</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-blue-400 transition">About</a></li>
+                    <li><a href="#cart" class="text-gray-400 hover:text-blue-400 transition">Cart</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-blue-400 transition">Contact Us</a></li>
                 </ul>
             </div>
             <div>
                 <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-2xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition" aria-label="Instagram"><i class="fab fa-instagram text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition" aria-label="Facebook"><i class="fab fa-facebook text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter text-2xl"></i></a>
                 </div>
             </div>
         </div>
-        <div class="mt-8 text-center text-gray-400">
-            <p>© 2025 Trendy Threads. All rights reserved. Developed by <a href="https://www.mbjare.com" target="_blank" rel="noopener noreferrer">MBJARE</a>.</p>
+        <div class="mt-8 text-center text-gray-400 text-sm">
+            <p>© 2025 Mbjare Fashion. All rights reserved. Developed by <a href="https://www.mbjare.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400">MBJARE</a>.</p>
         </div>
     </footer>
 
