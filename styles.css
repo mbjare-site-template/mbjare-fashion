@@ -1,4 +1,8 @@
-/* Advanced styles for professional UI/UX */
+/* Enhanced UI/UX Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .product-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
@@ -6,7 +10,7 @@
 }
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
 }
 .product-card img {
     transition: transform 0.5s ease;
@@ -16,23 +20,39 @@
 }
 
 .cart-item {
-    border-bottom: 1px solid #e5e7eb;
-    padding: 1.5rem 0;
     transition: background-color 0.3s ease;
 }
 .cart-item:hover {
     background-color: #f9fafb;
 }
 
-nav a {
+nav a, footer a {
     transition: color 0.3s ease, transform 0.3s ease;
 }
-nav a:hover {
-    transform: scale(1.1);
+nav a:hover, footer a:hover {
+    transform: scale(1.05);
 }
 
-.hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1445205170230-053b83016050');
+.carousel-item {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.carousel-item.active {
+    opacity: 1;
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @keyframes fadeIn {
@@ -43,9 +63,33 @@ nav a:hover {
     animation: fadeIn 1s ease-out;
 }
 
-#search-bar {
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+input, Ascending, select {
     transition: all 0.3s ease;
 }
-#search-bar:focus {
-    width: 250px;
+input:focus, select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(37, 99, 184, 0.3);
+}
+
+#loading {
+    transition: opacity 0.5s ease-out;
+}
+#loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#search-bar, #mobile-search-bar {
+    transition: all 0.3s ease;
+}
+#search-bar:focus, #mobile-search-bar:focus {
+    width: 100%;
 }
